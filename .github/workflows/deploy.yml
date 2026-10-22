@@ -1,0 +1,25 @@
+name: 빌드·배포
+
+# game.jjyu 와 같은 흐름: 데이터(data/events)가 바뀌어 push 되면 정적 빌드 → Cloudflare Workers 배포.
+# 수집 워크플로(collect.yml)는 수집 소스 확정 후 추가한다.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: node scripts/verify.mjs
+      - run: npm run build
+      # CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID 는 저장소 Secrets 에 넣는다 (game.jjyu 와 동일)
+      - run: npx wrangler@4 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
