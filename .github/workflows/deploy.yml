@@ -22,9 +22,9 @@ on:
       - 'wrangler.jsonc'
       - '.github/workflows/deploy.yml'
   workflow_dispatch: {}
-  # 안전망: 어떤 이유로든 호출이 빠져도 30분 안에는 최신 main 이 사이트에 올라간다.
+  # 안전망: 공연 데이터는 퀴즈처럼 매시간 바뀌지 않으므로 하루 4번이면 충분하다 — KST 09·12·15·18시 (UTC 0·3·6·9).
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 0,3,6,9 * * *'
 
 concurrency:
   group: deploy
