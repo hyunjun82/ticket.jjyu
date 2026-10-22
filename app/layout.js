@@ -15,6 +15,7 @@ export const metadata = {
   openGraph: { type: 'website', locale: 'ko_KR', siteName: SITE_NAME },
   robots: { index: true, follow: true },
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }] },
+  alternates: { types: { 'application/rss+xml': `${SITE_URL}/rss.xml` } },
   manifest: '/site.webmanifest',
 };
 
