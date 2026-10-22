@@ -23,8 +23,8 @@ function Card({ e, rank, openTag }) {
 export default function Home() {
   const all = getAllEvents();
   const now = new Date();
-  const booking = all.filter((e) => e.type !== 'festival');
-  const festivals = all.filter((e) => e.type === 'festival');
+  const booking = all.filter((e) => e.category !== '축제');
+  const festivals = all.filter((e) => e.category === '축제');
   const opening = booking
     .filter((e) => e.booking?.openAt && new Date(e.booking.openAt) >= now)
     .sort((a, b) => new Date(a.booking.openAt) - new Date(b.booking.openAt));
@@ -81,7 +81,7 @@ export default function Home() {
 
       {/* 5. 이번 주말 축제 — 현장형 템플릿 입구 */}
       <section className="sec fest">
-        <h2>이번 주말 축제·행사 <small>현장 사진으로 보기</small></h2>
+        <h2>이번 주말 축제·행사 <small>야간 개장 · 불꽃놀이 · 빛축제</small></h2>
         {festivals.length ? (
           <div className="rgrid">{festivals.slice(0, 4).map((e) => <Card key={e.slug} e={e} />)}</div>
         ) : <div className="empty">축제·행사 페이지는 현장형 템플릿이 들어오면 여기에 표시됩니다</div>}

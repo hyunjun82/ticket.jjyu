@@ -84,13 +84,14 @@ h1{font-size:28px;font-weight:800;letter-spacing:-.02em}
 .rounds{display:flex;flex-direction:column}
 .round{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line)}
 .round:last-child{border-bottom:0}
-.round .d{font-family:var(--font-display);font-weight:800;font-size:17px;width:84px}
+.round .d{font-family:var(--font-display);font-weight:800;font-size:17px;width:84px;flex:none}
 .round .d small{display:block;font-size:11px;color:var(--fg3);font-weight:500}
-.round .t{color:var(--fg2);font-size:14px;flex:1}
+.round .t{color:var(--fg2);font-size:14px;flex:1;min-width:0}
 .pill{font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px}
 .pill.wait{background:var(--wait-soft);color:var(--wait)}
 .pill.ok{background:var(--ok-soft);color:var(--ok)}
 .pill.done{background:var(--bg2);color:var(--fg3)}
+.pill.soldout{background:var(--accent-soft);color:var(--accent)}
 .timeline{list-style:none;margin:0;padding:8px 18px 14px}
 .timeline li{display:grid;grid-template-columns:18px 1fr auto;gap:12px;align-items:start;padding:10px 0;border-bottom:1px dashed var(--line)}
 .timeline li:last-child{border-bottom:0}
@@ -158,7 +159,7 @@ td b{font-family:var(--font-display);font-weight:800}
 .related h2 small{font-size:12.5px;color:var(--fg3);font-weight:500}
 .rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .rcard{display:block}
-.rcard .thumb{aspect-ratio:3/4;max-width:100%;border-radius:8px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.rcard .thumb{position:relative;aspect-ratio:3/4;max-width:100%;border-radius:8px;overflow:hidden;display:flex;align-items:flex-end;padding:14px;color:#fff;font-family:var(--font-display);font-weight:800;font-size:15px;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 .rcard .rt{font-weight:700;font-size:14px;margin-top:10px;line-height:1.35}
 .rcard .rd{font-size:12.5px;color:var(--fg3);margin-top:3px}
 .rcard .rd em{font-style:normal;color:var(--fg2);margin-right:6px}

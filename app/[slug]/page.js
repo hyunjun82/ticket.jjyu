@@ -91,7 +91,7 @@ export default async function EventPage({ params }) {
           </div>
           <dl className="meta">
             <dt>장소</dt><dd><b>{e.venue}</b></dd>
-            <dt>기간</dt><dd className="num">{dots(e.dateStart)} ~ {dots(e.dateEnd)} · {e.rounds.length}회차</dd>
+            <dt>기간</dt><dd className="num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</dd>
             <dt>관람등급</dt><dd>{e.rating}</dd>
             {e.seats?.length > 0 && <><dt>가격</dt><dd className="num">{e.seats.map((st) => `${st.grade} ${won(st.price)}`).join(' · ')}</dd></>}
             <dt>주최/기획</dt><dd>{e.organizer}</dd>
@@ -102,7 +102,7 @@ export default async function EventPage({ params }) {
 
       <div className="panel-grid">
         <div className="card">
-          <h3>공연 회차</h3>
+          <h3>{e.category === '축제' || e.category === '전시' ? '관람 회차' : '공연 회차'}</h3>
           <div className="rounds">
             {e.rounds.map((r) => {
               const d = splitDate(r.date);
@@ -110,15 +110,17 @@ export default async function EventPage({ params }) {
                 <div className="round" key={r.date + r.time}>
                   <div className="d num">{d.md}<small>{d.dow}</small></div>
                   <div className="t">{r.time}</div>
-                  <span className={`pill ${r.status === '예매중' ? 'ok' : r.status === '매진' ? 'done' : 'wait'}`}>{r.status}</span>
+                  <span className={`pill ${r.status === '예매중' ? 'ok' : r.status === '매진' ? 'soldout' : r.status === '종료' ? 'done' : 'wait'}`}>{r.status}</span>
                 </div>
               );
             })}
           </div>
-          {e.booking?.openAt && <div className="dday"><span>일반 예매 오픈까지</span><b id="dday" className="num">{dday(e.booking.openAt)}</b></div>}
+          {e.booking?.openAt && new Date(e.booking.openAt) > new Date()
+            ? <div className="dday"><span>일반 예매 오픈까지</span><b id="dday" className="num">{dday(e.booking.openAt)}</b></div>
+            : <div className="dday"><span>{e.booking.vendor} 예매 상태</span><b className="num" style={{ color: e.booking.status === '매진' || e.booking.status === '예매대기' ? 'var(--fg2)' : 'var(--ok)' }}>{e.booking.status || '예매중'}</b></div>}
         </div>
         <div className="card">
-          <h3>예매 오픈 일정</h3>
+          <h3>예매·행사 일정</h3>
           <ul className="timeline" id="timeline">
             {e.timeline.map((t) => (
               <li key={t.label} data-start={t.start} data-end={t.end}>
@@ -193,7 +195,7 @@ export default async function EventPage({ params }) {
 
       {e.related?.length > 0 && (
         <section className="related">
-          <h2>함께 보는 공연 <small>같은 시기 {e.region} {e.category}</small></h2>
+          <h2>함께 보는 공연 <small>같은 시기 공연·행사</small></h2>
           <div className="rgrid">
             {e.related.map((r) => (
               <a className="rcard" key={r.name} href={r.slug ? `/${r.slug}/` : e.booking.url} target={r.slug ? undefined : '_blank'} rel="noopener">
@@ -210,7 +212,7 @@ export default async function EventPage({ params }) {
 
       <div className="stickybar">
         <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{e.booking.vendor}</b>}</div>
-        <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">티켓 예매하기</a>
+        <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기'}</a>
       </div>
     </main>
   );
