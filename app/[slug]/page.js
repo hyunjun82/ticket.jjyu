@@ -3,6 +3,7 @@ import path from 'node:path';
 import { getAllEvents, getEvent, won, splitDate, dots, dday } from '../../lib/events';
 import Poster from '../../components/Poster';
 import LiveBits from '../../components/LiveBits';
+import AdSlot from '../../components/AdSlot';
 
 const SITE_URL = 'https://ticket.jjyu.co.kr';
 
@@ -131,7 +132,7 @@ export default async function EventPage({ params }) {
         </div>
       </div>
 
-      <div className="ad-slot">AD</div>
+      <AdSlot />
 
       <nav className="tabs" id="tabs">
         {tabs.map((t, i) => <a key={t.id} href={`#${t.id}`} className={i === 0 ? 'on' : ''}>{t.tab}</a>)}
@@ -178,7 +179,7 @@ export default async function EventPage({ params }) {
                 </div>
               )}
             </section>
-            {i === 1 && <div className="ad-slot">AD</div>}
+            {i === 1 && <AdSlot />}
           </div>
         ))}
         {e.faq?.length > 0 && (
@@ -191,7 +192,7 @@ export default async function EventPage({ params }) {
         )}
       </article>
 
-      <div className="ad-slot">AD</div>
+      <AdSlot />
 
       {e.related?.length > 0 && (
         <section className="related">
@@ -199,7 +200,9 @@ export default async function EventPage({ params }) {
           <div className="rgrid">
             {e.related.map((r) => (
               <a className="rcard" key={r.name} href={r.slug ? `/${r.slug}/` : e.booking.url} target={r.slug ? undefined : '_blank'} rel="noopener">
-                <div className="thumb" style={{ background: r.gradient }}>{r.name}</div>
+                <div className="thumb" style={{ background: r.gradient }}>
+                  {r.slug && fs.existsSync(path.join(process.cwd(), 'public', 'posters', r.slug + '.jpg')) ? <img src={`/posters/${r.slug}.jpg`} alt={r.name} loading="lazy" /> : <span className="tt">{r.name}</span>}
+                </div>
                 <div className="rt">{r.name}</div>
                 <div className="rd num"><em>{r.region}</em>{r.dates}</div>
               </a>

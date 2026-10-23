@@ -1,7 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { getAllEvents, won, dots, dday } from '../lib/events';
+import CategoryIcons from '../components/CategoryIcons';
+import AdSlot from '../components/AdSlot';
 
-const CATS = ['뮤지컬', '콘서트', '연극', '전시', '클래식', '스포츠', '축제'];
-const INITIAL = { 뮤지컬: 'M', 콘서트: 'C', 연극: 'P', 전시: 'E', 클래식: 'K', 스포츠: 'S', 축제: 'F' };
+const img = (e) => (e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src)) ? e.poster.src : null);
+
 
 export const metadata = { alternates: { canonical: '/' } };
 
@@ -10,9 +14,10 @@ function Card({ e, rank, openTag }) {
   return (
     <a className={`rcard ${rank ? 'rank' : ''}`} href={`/${e.slug}/`}>
       <div className="thumb" style={{ background: e.poster?.gradient }}>
+        {img(e) ? <img src={img(e)} alt={e.name} loading="lazy" /> : <span className="tt">{e.shortName || e.name}</span>}
         {openTag && <span className="open-tag">{openTag}</span>}
-        {e.shortName || e.name}
         {rank && <span className="no">{rank}</span>}
+        {(e.booking?.status === '매진' || e.booking?.status === '예매대기') && <span className="sold">{e.booking.status}</span>}
       </div>
       <div className="rt">{e.name}</div>
       <div className="rd num"><em>{e.region}</em>{dots(e.dateStart)} ~ {dots(e.dateEnd)}{low ? ` · ${won(low)}~` : ''}</div>
@@ -36,18 +41,22 @@ export default function Home() {
       <div className="home-hero">
         {hero[0] && (
           <a className="hero-card" href={`/${hero[0].slug}/`} style={{ background: hero[0].poster?.gradient }}>
-            <span className="hbtn">티켓 예매하기</span>
+            {img(hero[0]) && <img className="hbg" src={img(hero[0])} alt="" />}
+            {img(hero[0]) && <img className="hposter" src={img(hero[0])} alt={hero[0].name} />}
             <div>
-              <div className="hk">{hero[0].category.toUpperCase()} · {hero[0].region}</div>
+              <div className="hk">{hero[0].category} · {hero[0].region}</div>
               <h2>{hero[0].name}</h2>
               <div className="hd num">{dots(hero[0].dateStart)} ~ {dots(hero[0].dateEnd)} · {hero[0].venue}</div>
+              <span className="hbtn">{hero[0].booking?.status === '매진' || hero[0].booking?.status === '예매대기' ? '잔여석 확인하기' : '티켓 예매하기'}</span>
             </div>
           </a>
         )}
         <div className="hero-side">
           {hero.slice(1, 3).map((e) => (
             <a className="hero-card" key={e.slug} href={`/${e.slug}/`} style={{ background: e.poster?.gradient }}>
-              <div><div className="hk">{e.category}</div><h2>{e.name}</h2><div className="hd num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</div></div>
+              {img(e) && <img className="hbg" src={img(e)} alt="" />}
+              {img(e) && <img className="hposter" src={img(e)} alt={e.name} />}
+              <div><div className="hk">{e.category}</div><h2>{e.shortName || e.name}</h2><div className="hd num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</div></div>
             </a>
           ))}
           {hero.length < 3 && <div className="empty">수집되는 공연이 늘어나면 여기에 채워집니다</div>}
@@ -55,9 +64,7 @@ export default function Home() {
       </div>
 
       {/* 2. 카테고리 칩 */}
-      <div className="chips">
-        {CATS.map((c) => <a className="chip" key={c} href={`/?cat=${encodeURIComponent(c)}`}><i>{INITIAL[c]}</i>{c}</a>)}
-      </div>
+      <CategoryIcons />
 
       {/* 3. 오늘 티켓오픈 */}
       <section className="sec">
@@ -69,11 +76,11 @@ export default function Home() {
         ) : <div className="empty">오픈 예정인 공연이 없습니다</div>}
       </section>
 
-      <div className="ad-slot">AD</div>
+      <AdSlot />
 
       {/* 4. 주간 랭킹 */}
       <section className="sec">
-        <h2>주간 랭킹 <small>예매처 랭킹 기준</small></h2>
+        <h2>지금 많이 찾는 공연 <small>네이버 검색 유입 기준</small></h2>
         <div className="row-scroll">
           {booking.slice(0, 10).map((e, i) => <Card key={e.slug} e={e} rank={i + 1} />)}
         </div>
