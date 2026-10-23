@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ticket.jjyu.co.kr/sitemap.xml
+
+#DaumWebMasterTool:4c0735aaa7fda54aa569c42487e1d17a606aed400185d4c176d807e33cd896e7:WoYFtMaR84eZ7MaX1Xjw9A==

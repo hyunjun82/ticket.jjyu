@@ -48,7 +48,8 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Gothic+A1:wght@500;700;800;900&display=swap"
         />
-        {/* 네이버·다음 사이트 인증 메타는 서치어드바이저 등록 후 여기에 넣는다 */}
+        <meta name="naver-site-verification" content="fc881fe66760858423ad5283e0f9c0d3d3fe39fa" />
+        <meta name="DaumWebMasterTool" content="4c0735aaa7fda54aa569c42487e1d17a606aed400185d4c176d807e33cd896e7:WoYFtMaR84eZ7MaX1Xjw9A==" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fundingchoicesmessages.google.com" crossOrigin="anonymous" />
         {/* Offerwall 선로드 — 애드센스 뒤에 붙이면 표시가 2초 넘게 밀린다(퀴즈에서 실측). game.jjyu 와 동일 */}
