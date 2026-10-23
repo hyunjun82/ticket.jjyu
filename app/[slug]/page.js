@@ -31,6 +31,8 @@ export default async function EventPage({ params }) {
   const e = getEvent(slug);
   if (!e) return null;
 
+  const free = e.booking?.vendor === '공식 안내';
+  const ctaLabel = free ? '공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기';
   const hasImage = !!e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src));
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   const s = splitDate(e.dateStart), en = splitDate(e.dateEnd);
@@ -86,9 +88,9 @@ export default async function EventPage({ params }) {
           <div className="sub-title">{e.name}</div>
           <Html className="intro" html={e.intro} />
           <div className="cta-row">
-            <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">티켓 예매하기</a>
+            <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{ctaLabel}</a>
             <a className="btn btn-ghost" href={`#${e.sections[0].id}`}>{e.sections[0].tab} 보기</a>
-            <span className="cta-note">예매는 공식 예매처 {e.booking.vendor}에서 진행됩니다{e.booking.fee ? ` · 예매수수료 장당 ${won(e.booking.fee)}` : ''}</span>
+            <span className="cta-note">{free ? '입장권 예매 없이 주최 측 공식 안내를 따릅니다' : `예매는 공식 예매처 ${e.booking.vendor}에서 진행됩니다${e.booking.fee ? ` · 예매수수료 장당 ${won(e.booking.fee)}` : ''}`}</span>
           </div>
           <dl className="meta">
             <dt>장소</dt><dd><b>{e.venue}</b></dd>
@@ -214,8 +216,8 @@ export default async function EventPage({ params }) {
       <p className="cta-note" style={{ padding: '0 0 24px' }}>출처 {e.source} · {e.checkedAt} 확인</p>
 
       <div className="stickybar">
-        <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{e.booking.vendor}</b>}</div>
-        <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기'}</a>
+        <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{free ? '무료 · 공식 안내' : e.booking.vendor}</b>}</div>
+        <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{ctaLabel}</a>
       </div>
     </main>
   );
