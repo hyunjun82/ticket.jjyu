@@ -228,3 +228,23 @@ footer b{color:var(--fg2)}
 .open-tag{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;border-radius:4px;padding:3px 7px}
 .empty{border:1px dashed var(--line2);border-radius:10px;padding:26px;text-align:center;color:var(--fg3);font-size:13.5px}
 .fest .thumb{aspect-ratio:16/10}
+
+/* 카테고리 목록 */
+.catgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px 16px}
+@media (max-width:900px){.catgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.catgrid{grid-template-columns:repeat(2,1fr)}}
+.chip.on{color:var(--fg);font-weight:800}
+.chip.on i{box-shadow:0 0 0 3px var(--accent-soft),0 0 0 5px var(--accent)}
+.catnav{display:flex;gap:8px;flex-wrap:wrap;padding:24px 0}
+.catnav a{border:1px solid var(--line2);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--fg2)}
+.catnav a.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+/* 이동 페이지 */
+.gopage{padding-top:40px;min-height:60vh}
+.gocard{max-width:560px;margin:0 auto;text-align:center;border:1px solid var(--line);border-radius:16px;padding:36px 24px 28px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:10px}
+.gocard .l{font-size:13px;color:var(--fg3);font-weight:600}
+.gocard h1{font-size:24px}
+.gocard .s{font-size:13.5px;color:var(--fg2)}
+.gocard .btn{margin-top:10px;width:100%;max-width:360px}
+.gocard .cnt{font-size:13px;color:var(--fg3);margin-top:4px}
+.gocard .cnt a{text-decoration:underline;text-underline-offset:2px}
+.gocard .u{font-size:11.5px;color:var(--fg3);word-break:break-all;margin-top:8px;opacity:.8}

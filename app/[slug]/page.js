@@ -4,6 +4,7 @@ import { getAllEvents, getEvent, won, splitDate, dots, dday } from '../../lib/ev
 import Poster from '../../components/Poster';
 import LiveBits from '../../components/LiveBits';
 import AdSlot from '../../components/AdSlot';
+import { goHref } from '../../lib/go';
 
 const SITE_URL = 'https://ticket.jjyu.co.kr';
 
@@ -88,7 +89,7 @@ export default async function EventPage({ params }) {
           <div className="sub-title">{e.name}</div>
           <Html className="intro" html={e.intro} />
           <div className="cta-row">
-            <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{ctaLabel}</a>
+            <a className="btn btn-primary" href={goHref(e.booking.url)}>{ctaLabel}</a>
             <a className="btn btn-ghost" href={`#${e.sections[0].id}`}>{e.sections[0].tab} 보기</a>
             <span className="cta-note">{free ? '입장권 예매 없이 주최 측 공식 안내를 따릅니다' : `예매는 공식 예매처 ${e.booking.vendor}에서 진행됩니다${e.booking.fee ? ` · 예매수수료 장당 ${won(e.booking.fee)}` : ''}`}</span>
           </div>
@@ -201,7 +202,7 @@ export default async function EventPage({ params }) {
           <h2>함께 보는 공연 <small>같은 시기 공연·행사</small></h2>
           <div className="rgrid">
             {e.related.map((r) => (
-              <a className="rcard" key={r.name} href={r.slug ? `/${r.slug}/` : e.booking.url} target={r.slug ? undefined : '_blank'} rel="noopener">
+              <a className="rcard" key={r.name} href={r.slug ? `/${r.slug}/` : goHref(e.booking.url)}>
                 <div className="thumb" style={{ background: r.gradient }}>
                   {r.slug && fs.existsSync(path.join(process.cwd(), 'public', 'posters', r.slug + '.jpg')) ? <img src={`/posters/${r.slug}.jpg`} alt={r.name} loading="lazy" /> : <span className="tt">{r.name}</span>}
                 </div>
@@ -217,7 +218,7 @@ export default async function EventPage({ params }) {
 
       <div className="stickybar">
         <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{free ? '무료 · 공식 안내' : e.booking.vendor}</b>}</div>
-        <a className="btn btn-primary" href={e.booking.url} target="_blank" rel="noopener">{ctaLabel}</a>
+        <a className="btn btn-primary" href={goHref(e.booking.url)}>{ctaLabel}</a>
       </div>
     </main>
   );

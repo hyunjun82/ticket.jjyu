@@ -36,7 +36,8 @@ const siteJsonLd = {
   ],
 };
 
-const CATS = ['뮤지컬', '콘서트', '연극', '전시', '클래식', '스포츠', '축제'];
+import { CATS as CATPAIRS, catHref } from '../lib/cats';
+const CATS = CATPAIRS.map(([n]) => n);
 
 export default function RootLayout({ children }) {
   return (
@@ -79,7 +80,7 @@ export default function RootLayout({ children }) {
             <a className="logo" href="/"><i />TICKETDAY</a>
             <nav className="cats">
               {CATS.map((c) => (
-                <a key={c} href={`/?cat=${encodeURIComponent(c)}`}>{c}</a>
+                <a key={c} href={catHref(c)}>{c}</a>
               ))}
             </nav>
             <div className="search">

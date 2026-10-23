@@ -123,11 +123,12 @@ export const CATEGORIES = [
   { name: '축제', bg: 'linear-gradient(145deg,#fff2f0,#ffdcd8)', Icon: Festival },
 ];
 
-export default function CategoryIcons() {
+import { catHref } from '../lib/cats';
+export default function CategoryIcons({ active } = {}) {
   return (
     <div className="chips">
       {CATEGORIES.map(({ name, bg, Icon }) => (
-        <a className="chip" key={name} href={`/?cat=${encodeURIComponent(name)}`}>
+        <a className={`chip ${active === name ? 'on' : ''}`} key={name} href={catHref(name)}>
           <i style={{ background: bg }}><Icon /></i>
           {name}
         </a>
