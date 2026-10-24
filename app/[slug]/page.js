@@ -1,3 +1,4 @@
+import { av } from '../../lib/avif';
 import fs from 'node:fs';
 import path from 'node:path';
 import { getAllEvents, getEvent, won, splitDate, dots, dday } from '../../lib/events';
@@ -204,7 +205,7 @@ export default async function EventPage({ params }) {
             {e.related.map((r) => (
               <a className="rcard" key={r.name} href={r.slug ? `/${r.slug}/` : goHref(e.booking.url)}>
                 <div className="thumb" style={{ background: r.gradient }}>
-                  {r.slug && fs.existsSync(path.join(process.cwd(), 'public', 'posters', r.slug + '.jpg')) ? <img src={`/posters/${r.slug}.jpg`} alt={r.name} loading="lazy" /> : <span className="tt">{r.name}</span>}
+                  {r.slug && fs.existsSync(path.join(process.cwd(), 'public', 'posters', r.slug + '.jpg')) ? <img src={av(`/posters/${r.slug}.jpg`)} alt={r.name} loading="lazy" /> : <span className="tt">{r.name}</span>}
                 </div>
                 <div className="rt">{r.name}</div>
                 <div className="rd num"><em>{r.region}</em>{r.dates}</div>
