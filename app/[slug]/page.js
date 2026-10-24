@@ -83,7 +83,7 @@ export default async function EventPage({ params }) {
           <div className="badges">
             <span className="badge cat">{e.category}</span>
             {(e.badges || []).map((b, i) => <span key={b} className={`badge ${i === 0 ? 'ex' : 'line'}`}>{b}</span>)}
-            <span className="badge line">{e.rating}</span>
+            {e.rating && <span className="badge line">{e.rating}</span>}
           </div>
           <h1>{e.title}</h1>
           <div className="sub-title">{e.name}</div>
