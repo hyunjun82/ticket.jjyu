@@ -14,12 +14,23 @@ export const metadata = {
   keywords: ['티켓 예매', '예매 일정', '티켓 오픈', '콘서트 예매', '뮤지컬 예매', '전시 예매', '축제 일정'],
   openGraph: { type: 'website', locale: 'ko_KR', siteName: SITE_NAME },
   robots: { index: true, follow: true },
-  icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }] },
+  applicationName: SITE_NAME,
+  appleWebApp: { title: SITE_NAME },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
   alternates: { types: { 'application/rss+xml': `${SITE_URL}/rss.xml` } },
   manifest: '/site.webmanifest',
 };
 
-export const viewport = { themeColor: '#e6213a' };
+export const viewport = { themeColor: '#ff2d55' };
 
 const siteJsonLd = {
   '@context': 'https://schema.org',
@@ -29,10 +40,11 @@ const siteJsonLd = {
       '@id': `${SITE_URL}/#website`,
       url: SITE_URL,
       name: SITE_NAME,
+      alternateName: ['티켓데이', 'TICKETDAY 티켓데이'],
       description: '공연·전시·축제 티켓 예매 정보',
       inLanguage: 'ko-KR',
     },
-    { '@type': 'Organization', '@id': `${SITE_URL}/#org`, name: SITE_NAME, url: SITE_URL },
+    { '@type': 'Organization', '@id': `${SITE_URL}/#org`, name: SITE_NAME, alternateName: '티켓데이', url: SITE_URL, logo: `${SITE_URL}/icon-512.png` },
   ],
 };
 
