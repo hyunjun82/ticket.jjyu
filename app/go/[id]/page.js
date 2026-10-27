@@ -1,6 +1,5 @@
 import { getAllGo, getGo, hostLabel } from '../../../lib/go';
 import { getEvent } from '../../../lib/events';
-import Go from '../../../components/Go';
 import AdSlot from '../../../components/AdSlot';
 export function generateStaticParams() { return getAllGo().map((g) => ({ id: g.id })); }
 export async function generateMetadata({ params }) { const { id } = await params; const g = getGo(id); if (!g) return {}; return { title: `${g.fromName} · ${hostLabel(g.url)}로 이동`, robots: { index: false, follow: false } }; }
@@ -14,7 +13,7 @@ export default async function GoPage({ params }) {
         <h1>{g.fromName}</h1>
         <div className="s">{g.label}{g.sub ? ` · ${g.sub}` : ''}</div>
         <a className="btn btn-primary" href={g.url} rel="noopener">지금 바로 이동</a>
-        <div className="cnt"><Go url={g.url} /> · <a href={`/${g.from}/`}>{g.fromName} 페이지로 돌아가기</a></div>
+        <div className="cnt">위 버튼을 누르면 공식 페이지로 이동합니다 · <a href={`/${g.from}/`}>{g.fromName} 페이지로 돌아가기</a></div>
         <div className="u">{g.url}</div>
       </div>
       <AdSlot />
