@@ -22,11 +22,11 @@
   "region": "경남",
   "dateStart": "2026-11-02",
   "dateEnd": "2026-11-15",
-  "rating": "전체관람가",
+  "rating": "",
   "organizer": "거제시(거제시농업기술센터)",
   "contact": "",
   "booking": {
-    "vendor": "공식 안내",
+    "vendor": "언론 보도 (아시아뉴스통신)",
     "url": "https://www.anewsa.com/detail.php?number=3212190",
     "productId": "",
     "fee": 0,
@@ -133,10 +133,6 @@
           [
             "운영 방식",
             "자율 관람 (무대 공연·부대 행사 없음)"
-          ],
-          [
-            "주관",
-            "거제시농업기술센터"
           ]
         ]
       }

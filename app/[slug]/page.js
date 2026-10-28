@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   return {
     title: e.title,
-    description: `${e.name} — ${e.venue}, ${dots(e.dateStart)}~${dots(e.dateEnd)}.${low ? ` ${won(low)}부터.` : ''} 예매 오픈 일정, 좌석 가격, 선예매 조건, 취소 기준을 ${e.booking?.vendor || '공식 예매처'} 기준으로 정리했습니다.`,
+    description: `${e.name} — ${e.venue}, ${dots(e.dateStart)}~${dots(e.dateEnd)}.${low ? ` ${won(low)}부터.` : ''} ${e.category === '축제' || e.booking?.vendor === '공식 안내' || /^언론/.test(e.booking?.vendor || '') ? `일정·장소·요금·교통을 ${e.booking?.vendor === '공식 안내' ? '주최 측 공식 안내' : e.booking?.vendor || '공식 안내'} 기준으로 정리했습니다.` : `예매 오픈 일정, 좌석 가격, 선예매 조건, 취소 기준을 ${e.booking?.vendor || '공식 예매처'} 기준으로 정리했습니다.`}`,
     alternates: { canonical: `/${e.slug}/` },
     openGraph: { title: e.title, description: `${e.name} · ${e.venue}`, type: 'article' },
   };
@@ -53,7 +53,7 @@ export default async function EventPage({ params }) {
         eventStatus: 'https://schema.org/EventScheduled',
         location: { '@type': 'Place', name: e.venue, address: e.region },
         organizer: { '@type': 'Organization', name: e.organizer },
-        offers: (e.seats || []).map((st) => ({
+        offers: (e.seats || []).filter((st) => st.price > 0 || /^무료/.test(st.grade)).map((st) => ({
           '@type': 'Offer', name: st.grade, price: st.price, priceCurrency: 'KRW', url: e.booking?.url,
           availability: 'https://schema.org/PreOrder', validFrom: e.booking?.openAt,
         })),
@@ -99,8 +99,8 @@ export default async function EventPage({ params }) {
           <dl className="meta">
             <dt>장소</dt><dd><b>{e.venue}</b></dd>
             <dt>기간</dt><dd className="num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</dd>
-            <dt>관람등급</dt><dd>{e.rating}</dd>
-            {e.seats?.length > 0 && <><dt>가격</dt><dd className="num">{e.seats.map((st) => `${st.grade} ${won(st.price)}`).join(' · ')}</dd></>}
+            {e.rating && <><dt>관람등급</dt><dd>{e.rating}</dd></>}
+            {e.seats?.length > 0 && <><dt>가격</dt><dd className="num">{e.seats.map((st) => (st.price > 0 ? `${st.grade} ${won(st.price)}` : st.grade)).join(' · ')}</dd></>}
             <dt>주최/기획</dt><dd>{e.organizer}</dd>
             <dt>문의</dt><dd className="num">{e.contact}</dd>
           </dl>
@@ -155,7 +155,7 @@ export default async function EventPage({ params }) {
                   {e.seats.map((st) => (
                     <div key={st.grade}>
                       <div className="g"><i style={{ background: st.color }} />{st.grade}</div>
-                      <div className="pr num">{won(st.price)}<small>{e.booking.fee ? `수수료 포함 ${won(st.price + e.booking.fee)}` : ''}</small></div>
+                      <div className="pr num">{st.price > 0 ? won(st.price) : (/^무료/.test(st.grade) ? '무료' : '—')}<small>{e.booking.fee ? `수수료 포함 ${won(st.price + e.booking.fee)}` : ''}</small></div>
                     </div>
                   ))}
                 </div>

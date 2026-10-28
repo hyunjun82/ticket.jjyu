@@ -26,12 +26,12 @@
   "organizer": "보은군 (주관 MBC충북)",
   "contact": "",
   "booking": {
-    "vendor": "공식 안내",
+    "vendor": "언론 보도 (충청일보)",
     "url": "https://www.ccdailynews.com/news/articleView.html?idxno=2448233",
     "productId": "",
     "fee": 0,
     "delivery": 0,
-    "openAt": "2026-10-27T00:00:00+09:00",
+    "openAt": null,
     "exclusive": false,
     "status": "예정"
   },
