@@ -33,7 +33,7 @@
     "delivery": 0,
     "openAt": "2026-07-08T00:00:00+09:00",
     "exclusive": false,
-    "status": "예정"
+    "status": "사전 마감"
   },
   "rounds": [
     {
@@ -62,16 +62,6 @@
       "grade": "현장 할인",
       "price": 30000,
       "color": "#f08c1e"
-    },
-    {
-      "grade": "사전 일반 (마감)",
-      "price": 30000,
-      "color": "#9aa4ad"
-    },
-    {
-      "grade": "사전 할인 (마감)",
-      "price": 25000,
-      "color": "#c3c9ce"
     }
   ],
   "timeline": [
