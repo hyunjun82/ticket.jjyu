@@ -160,6 +160,11 @@ export default async function EventPage({ params }) {
                 </div>
               )}
               {(sec.paragraphs || []).map((p, j) => <Html key={j} html={p} />)}
+              {sec.images?.length > 0 && (
+                <div className={`figs n${Math.min(sec.images.length, 3)}`}>
+                  {sec.images.map((im) => <figure key={im.src}><img src={av(im.src)} alt={im.alt || im.cap} loading="lazy" /><figcaption>{im.cap}{im.credit ? <span>사진 · {im.credit}</span> : null}</figcaption></figure>)}
+                </div>
+              )}
               {sec.table && (
                 <div className="table-wrap"><table>
                   <thead><tr>{sec.table.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>

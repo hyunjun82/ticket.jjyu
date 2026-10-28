@@ -6,7 +6,7 @@ Pillow 11.2+ 필요. 이미 있는 avif는 원본이 더 새것일 때만 다시
 import os, sys, subprocess
 from PIL import Image
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'public')
-DIRS = [d for d in ('img', 'posters') if os.path.isdir(os.path.join(ROOT, d))]
+DIRS = [d for d in ('img', 'posters', 'photos') if os.path.isdir(os.path.join(ROOT, d))]
 MAXW, Q = 1600, 62
 done = skip = 0
 REPO = os.path.join(ROOT, '..')
