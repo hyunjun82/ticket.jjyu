@@ -36,7 +36,7 @@ export default async function EventPage({ params }) {
   const press = /^언론/.test(e.booking?.vendor || '');
   const free = e.booking?.vendor === '공식 안내' || press;
   const freeLabel = (e.seats || []).some((x) => /^무료/.test(x.grade)) ? '무료 · 공식 안내' : ((e.seats || [])[0]?.grade || '공식 안내');
-  const ctaLabel = press ? '보도 기사 보기' : free ? '공식 안내 보기' : /마감/.test(e.booking.status || '') ? '현장 신청 · 공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기';
+  const ctaLabel = press ? '보도 기사 보기' : free ? '공식 안내 보기' : /마감/.test(e.booking.status || '') ? '현장 신청 · 공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : /매진|잔여석 없음/.test(e.booking.status || '') ? '잔여석 확인하기' : '티켓 예매하기';
   const hasImage = !!e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src));
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   const s = splitDate(e.dateStart), en = splitDate(e.dateEnd);
