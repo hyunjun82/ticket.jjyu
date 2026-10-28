@@ -34,6 +34,7 @@ export default async function EventPage({ params }) {
   if (!e) return null;
 
   const free = e.booking?.vendor === '공식 안내';
+  const freeLabel = (e.seats || []).some((x) => /^무료/.test(x.grade)) ? '무료 · 공식 안내' : ((e.seats || [])[0]?.grade || '공식 안내');
   const ctaLabel = free ? '공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기';
   const hasImage = !!e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src));
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
@@ -224,7 +225,7 @@ export default async function EventPage({ params }) {
       <p className="cta-note" style={{ padding: '0 0 24px' }}>출처 {e.source} · {e.checkedAt} 확인</p>
 
       <div className="stickybar">
-        <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{free ? '무료 · 공식 안내' : e.booking.vendor}</b>}</div>
+        <div className="pr">{low ? <>{e.seats.find((x) => x.price === low).grade}부터<b className="num">{won(low)}</b></> : <b>{free ? freeLabel : e.booking.vendor}</b>}</div>
         <a className="btn btn-primary" href={goHref(e.booking.url)}>{ctaLabel}</a>
       </div>
     </main>
