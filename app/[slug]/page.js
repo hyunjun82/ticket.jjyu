@@ -33,9 +33,10 @@ export default async function EventPage({ params }) {
   const e = getEvent(slug);
   if (!e) return null;
 
-  const free = e.booking?.vendor === '공식 안내';
+  const press = /^언론/.test(e.booking?.vendor || '');
+  const free = e.booking?.vendor === '공식 안내' || press;
   const freeLabel = (e.seats || []).some((x) => /^무료/.test(x.grade)) ? '무료 · 공식 안내' : ((e.seats || [])[0]?.grade || '공식 안내');
-  const ctaLabel = free ? '공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기';
+  const ctaLabel = press ? '보도 기사 보기' : free ? '공식 안내 보기' : /마감/.test(e.booking.status || '') ? '현장 신청 · 공식 안내 보기' : e.booking.status === '예매대기' ? '예매대기 · 잔여석 확인' : e.booking.status === '매진' ? '잔여석 확인하기' : '티켓 예매하기';
   const hasImage = !!e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src));
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   const s = splitDate(e.dateStart), en = splitDate(e.dateEnd);
@@ -94,7 +95,7 @@ export default async function EventPage({ params }) {
             <a className="btn btn-primary" href={goHref(e.booking.url)}>{ctaLabel}</a>
             <a className="btn btn-ghost" href={`#${e.sections[0].id}`}>{e.sections[0].tab} 보기</a>
             {(e.links || []).map((l) => <a key={l.url} className="btn btn-ghost" href={goHref(l.url)}>{l.label}</a>)}
-            <span className="cta-note">{free ? '입장권 예매 없이 주최 측 공식 안내를 따릅니다' : `예매는 공식 예매처 ${e.booking.vendor}에서 진행됩니다${e.booking.fee ? ` · 예매수수료 장당 ${won(e.booking.fee)}` : ''}`}</span>
+            <span className="cta-note">{press ? `공식 안내 페이지가 없어 ${e.booking.vendor.replace(/^언론 보도\s*/, '').replace(/[()]/g, '')} 보도를 연결합니다` : free ? '입장권 예매 없이 주최 측 공식 안내를 따릅니다' : /마감/.test(e.booking.status || '') ? `온라인 신청은 마감됐습니다 · 공식 안내는 ${e.booking.vendor}` : `예매는 공식 예매처 ${e.booking.vendor}에서 진행됩니다${e.booking.fee ? ` · 예매수수료 장당 ${won(e.booking.fee)}` : ''}`}</span>
           </div>
           <dl className="meta">
             <dt>장소</dt><dd><b>{e.venue}</b></dd>
