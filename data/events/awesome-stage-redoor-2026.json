@@ -1,0 +1,185 @@
+{
+  "slug": "awesome-stage-redoor-2026",
+  "type": "booking",
+  "category": "콘서트",
+  "subCategory": "밴드 콘서트",
+  "title": "어썸스테이지 리도어 콘서트 시간 예매 티켓팅 KBS아레나",
+  "name": "2026 Awesome Stage Special Concert : Redoor",
+  "shortName": "어썸스테이지 리도어",
+  "artist": "Redoor(리도어)",
+  "poster": {
+    "src": "/posters/awesome-stage-redoor-2026.jpg",
+    "eyebrow": "2026.12.12 ~ 12.13 · KBS아레나",
+    "headline": "Awesome Stage\nREDOOR",
+    "gradient": "linear-gradient(165deg,#f2f2f0 0%,#9a9a9a 50%,#1b1f24 100%)"
+  },
+  "badges": [
+    "티켓링크 판매",
+    "글로벌 티켓 별도",
+    "Awesome Stage"
+  ],
+  "venue": "KBS아레나",
+  "region": "서울",
+  "dateStart": "2026-12-12",
+  "dateEnd": "2026-12-13",
+  "rating": "",
+  "organizer": "",
+  "contact": "티켓링크 고객센터 1588-7890",
+  "booking": {
+    "vendor": "티켓링크",
+    "url": "https://www.ticketlink.co.kr/product/66181",
+    "productId": "66181",
+    "fee": null,
+    "delivery": null,
+    "openAt": "",
+    "exclusive": false,
+    "status": "예매처 확인"
+  },
+  "rounds": [
+    {
+      "date": "2026-12-12",
+      "time": "오후 6:00",
+      "status": "예매처 확인"
+    },
+    {
+      "date": "2026-12-13",
+      "time": "오후 5:00",
+      "status": "예매처 확인"
+    }
+  ],
+  "seats": [],
+  "timeline": [
+    {
+      "label": "공연 1일차",
+      "detail": "12.12(토) 오후 6시 · KBS아레나",
+      "start": "2026-12-12T18:00:00+09:00",
+      "end": "2026-12-12T23:59:00+09:00"
+    },
+    {
+      "label": "공연 2일차",
+      "detail": "12.13(일) 오후 5시 · KBS아레나",
+      "start": "2026-12-13T17:00:00+09:00",
+      "end": "2026-12-13T23:59:00+09:00"
+    }
+  ],
+  "intro": "<b>2026 Awesome Stage Special Concert : Redoor</b>는 밴드 리도어(Redoor)가 2026년 12월 12일(토) 오후 6시, 13일(일) 오후 5시 두 차례 서울 KBS아레나에서 여는 어썸스테이지 스페셜 콘서트입니다. 국내 예매는 티켓링크 상품 페이지에서, 해외 관객 예매는 티켓링크 글로벌 페이지에서 진행합니다.",
+  "sections": [
+    {
+      "id": "sec1",
+      "tab": "콘서트 시간",
+      "heading": "리도어 콘서트 시간은 어떻게 되나요?",
+      "lead": "12월 12일(토)은 오후 6시, 12월 13일(일)은 오후 5시에 시작합니다. 장소는 두 날 모두 KBS아레나입니다.",
+      "table": {
+        "head": [
+          "날짜",
+          "시작 시각",
+          "장소"
+        ],
+        "rows": [
+          [
+            "12.12(토)",
+            "오후 6:00",
+            "KBS아레나"
+          ],
+          [
+            "12.13(일)",
+            "오후 5:00",
+            "KBS아레나"
+          ]
+        ]
+      },
+      "paragraphs": [
+        "공식 포스터에는 멤버 Joo Sangwook, Lee Deungdae, Choi Seunghyun 세 명의 이름과 함께 공연 날짜·시각이 표기돼 있습니다."
+      ]
+    },
+    {
+      "id": "sec2",
+      "tab": "예매",
+      "heading": "어썸스테이지 리도어 예매와 티켓팅은 어디서 하나요?",
+      "lead": "어썸스테이지 공식 링크 페이지에 국내용 일반 티켓은 티켓링크 상품 66181, 해외용은 티켓링크 글로벌 상품 66181로 안내돼 있습니다.",
+      "steps": [
+        {
+          "title": "국내 관객",
+          "detail": "티켓링크 「2026 Awesome Stage Special Concert : Redoor」 상품 페이지에서 예매"
+        },
+        {
+          "title": "해외 관객",
+          "detail": "티켓링크 글로벌(영문) 페이지의 같은 상품에서 예매"
+        },
+        {
+          "title": "가격·오픈 시각 확인",
+          "detail": "좌석 등급별 가격과 예매 오픈 일정은 상품 페이지 공지에서 확인"
+        }
+      ]
+    },
+    {
+      "id": "sec3",
+      "tab": "어썸스테이지 구매방법",
+      "heading": "어썸 스테이지 구매방법은 국내와 해외가 다른가요?",
+      "lead": "네. 어썸스테이지 공식 링크 페이지는 리도어 공연을 「일반 티켓(티켓링크)」과 「Global Ticket(ticketLINK)」 두 링크로 나눠 안내합니다.",
+      "paragraphs": [
+        "같은 링크 페이지에는 N.Flying x Hi-Fi Un!corn 공연(티켓링크)과 FTISLAND 공연(NOL 티켓)도 함께 올라와 있어, 어썸스테이지 공연마다 예매처가 다를 수 있습니다. 리도어 공연의 예매처는 티켓링크입니다."
+      ]
+    },
+    {
+      "id": "sec4",
+      "tab": "공연장",
+      "heading": "리도어 콘서트 장소와 입장 정보는 어떻게 확인하나요?",
+      "lead": "이번 어썸스테이지 리도어 공연은 12월 12일과 13일 이틀 모두 서울 KBS아레나에서 열립니다.",
+      "paragraphs": [
+        "입장 시각, 주차, 좌석 배치는 티켓링크 상품 페이지 공지를 확인해야 합니다."
+      ],
+      "note": "등급별 가격·예매 오픈 일정·관람 연령은 공식 출처에서 확인하지 못해 비워 두었습니다. 정보는 2026년 10월 28일 기준입니다."
+    }
+  ],
+  "faq": [
+    {
+      "q": "리도어 어썸스테이지 공연은 며칠인가요?",
+      "a": "2026년 12월 12일(토) 오후 6시와 13일(일) 오후 5시, 두 번입니다."
+    },
+    {
+      "q": "어디서 예매하나요?",
+      "a": "티켓링크입니다. 해외 관객은 티켓링크 글로벌 페이지를 이용합니다."
+    },
+    {
+      "q": "공연장은 어디인가요?",
+      "a": "서울 KBS아레나입니다."
+    }
+  ],
+  "related": [],
+  "source": "티켓링크 상품(66181) 공식 포스터 · 어썸스테이지 공식 링크 페이지(litt.ly/awesome_stage)",
+  "checkedAt": "2026-10-28",
+  "updatedAt": "2026-10-28T16:00:00+09:00",
+  "posterUrl": "https://image.toast.com/aaaaab/ticketlink/TKL_2/RE_PST_1008.jpg",
+  "keywordsUsed": [
+    "어썸스테이지 리도어",
+    "리도어 어썸스테이지",
+    "어썸스테이지",
+    "리도어 콘서트",
+    "리도어콘서트시간",
+    "어썸스테이지 예매",
+    "어썸스테이지 티켓팅",
+    "어썸 스테이지 구매방법"
+  ],
+  "notes": "미확인: 좌석 등급별 가격 · 미확인: 선예매/일반예매 오픈 일시 · 미확인: 관람연령·러닝타임 · 미확인: 주최/주관(포스터 하단 CULTURE FACTORY 로고만 확인, organizer 비움) · 미확인: 판매 상태(status '예매처 확인') · 티켓링크 상품 페이지 본문은 스크립트 렌더링이라 읽지 못함(상품명·포스터 경로만 확인) · KBS아레나 주소·교통 미확인 · 본문 사진: 공식 사진은 포스터뿐이라 비움 · '어썸스테이지 부산·시야·굿즈·뜻' 검색어는 공식 근거 없어 미사용",
+  "sourcesList": [
+    {
+      "media": "티켓링크",
+      "date": "2026-10-28",
+      "url": "https://www.ticketlink.co.kr/product/66181",
+      "what": "상품명 「2026 Awesome Stage Special Concert : Redoor」, 포스터 이미지 경로"
+    },
+    {
+      "media": "티켓링크 공식 포스터",
+      "date": "2026-10-08",
+      "url": "https://image.toast.com/aaaaab/ticketlink/TKL_2/RE_PST_1008.jpg",
+      "what": "KBS ARENA, 2026.12.12(sat) 18:00 · 12.13(sun) 17:00, 멤버 이름"
+    },
+    {
+      "media": "어썸스테이지 공식 링크 페이지",
+      "date": "2026-10-28",
+      "url": "https://litt.ly/awesome_stage",
+      "what": "Redoor 일반 티켓(티켓링크 66181)·Global Ticket 링크"
+    }
+  ]
+}
