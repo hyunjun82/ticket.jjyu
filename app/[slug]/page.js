@@ -102,8 +102,8 @@ export default async function EventPage({ params }) {
             <dt>기간</dt><dd className="num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</dd>
             {e.rating && <><dt>관람등급</dt><dd>{e.rating}</dd></>}
             {e.seats?.length > 0 && <><dt>가격</dt><dd className="num">{e.seats.map((st) => (st.price > 0 ? `${st.grade} ${won(st.price)}` : st.grade)).join(' · ')}</dd></>}
-            <dt>주최/기획</dt><dd>{e.organizer}</dd>
-            <dt>문의</dt><dd className="num">{e.contact}</dd>
+            {e.organizer && <><dt>주최/기획</dt><dd>{e.organizer}</dd></>}
+            {e.contact && <><dt>문의</dt><dd className="num">{e.contact}</dd></>}
           </dl>
         </div>
       </div>
