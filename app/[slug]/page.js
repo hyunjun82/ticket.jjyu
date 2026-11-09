@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   return {
     title: e.title,
-    description: `${e.name} — ${e.venue}, ${dots(e.dateStart)}~${dots(e.dateEnd)}.${low ? ` ${won(low)}부터.` : ''} ${e.category === '축제' || e.booking?.vendor === '공식 안내' || /^언론/.test(e.booking?.vendor || '') ? `일정·장소·요금·교통을 ${e.booking?.vendor === '공식 안내' ? '주최 측 공식 안내' : e.booking?.vendor || '공식 안내'} 기준으로 정리했습니다.` : `예매 오픈 일정, 좌석 가격, 선예매 조건, 취소 기준을 ${e.booking?.vendor || '공식 예매처'} 기준으로 정리했습니다.`}`,
+    description: `${e.name} — ${e.venue}, ${e.dateStart === e.dateEnd ? dots(e.dateStart) : `${dots(e.dateStart)}~${dots(e.dateEnd)}`}.${low ? ` ${won(low)}부터.` : ''} ${e.category === '축제' || e.booking?.vendor === '공식 안내' || /^언론/.test(e.booking?.vendor || '') ? `일정·장소·요금·교통을 ${e.booking?.vendor === '공식 안내' ? '주최 측 공식 안내' : e.booking?.vendor || '공식 안내'} 기준으로 정리했습니다.` : `예매 오픈 일정, 좌석 가격, 선예매 조건, 취소 기준을 ${e.booking?.vendor || '공식 예매처'} 기준으로 정리했습니다.`}`,
     alternates: { canonical: `/${e.slug}/` },
     openGraph: { title: e.title, description: `${e.name} · ${e.venue}`, type: 'article' },
   };
@@ -40,7 +40,8 @@ export default async function EventPage({ params }) {
   const hasImage = !!e.poster?.src && fs.existsSync(path.join(process.cwd(), 'public', e.poster.src));
   const low = e.seats?.length ? Math.min(...e.seats.map((s) => s.price)) : null;
   const s = splitDate(e.dateStart), en = splitDate(e.dateEnd);
-  const dateLabel = `${e.dateStart.slice(0, 4)}.${s.md} (${s.dow[0]}) – ${en.md} (${en.dow[0]})`;
+  const oneDay = e.dateStart === e.dateEnd;
+  const dateLabel = oneDay ? `${e.dateStart.slice(0, 4)}.${s.md} (${s.dow[0]})` : `${e.dateStart.slice(0, 4)}.${s.md} (${s.dow[0]}) – ${en.md} (${en.dow[0]})`;
   const tabs = [...e.sections.map((x) => ({ id: x.id, tab: x.tab })), ...(e.faq?.length ? [{ id: 'faq', tab: '자주 묻는 질문' }] : [])];
 
   const jsonLd = {
@@ -99,7 +100,7 @@ export default async function EventPage({ params }) {
           </div>
           <dl className="meta">
             <dt>장소</dt><dd><b>{e.venue}</b></dd>
-            <dt>기간</dt><dd className="num">{dots(e.dateStart)} ~ {dots(e.dateEnd)}</dd>
+            <dt>{oneDay ? '날짜' : '기간'}</dt><dd className="num">{oneDay ? dots(e.dateStart) : `${dots(e.dateStart)} ~ ${dots(e.dateEnd)}`}</dd>
             {e.rating && <><dt>관람등급</dt><dd>{e.rating}</dd></>}
             {e.seats?.length > 0 && <><dt>가격</dt><dd className="num">{e.seats.map((st) => (st.price > 0 ? `${st.grade} ${won(st.price)}` : st.grade)).join(' · ')}</dd></>}
             {e.organizer && <><dt>주최/기획</dt><dd>{e.organizer}</dd></>}
